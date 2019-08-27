@@ -25,10 +25,12 @@ function page1Create(){
         }
     };
     
+    var imgNZ = new createjs.Bitmap(queue.getResult("nz_capture"));
     
     
     scene.addEventListener("tick", scene.animateText);       
-    scene.addChild(scene.data.tText);    
+    scene.addChild(scene.data.tText);   
+    scene.addChild(imgNZ);
     return scene;
 }
 

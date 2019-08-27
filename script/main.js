@@ -12,19 +12,19 @@ function init(){
 
 function preload(){
     queue = new createjs.LoadQueue();
-    queue.addEventListener('fileload', main);    
+    
 
-    files = ["nz_capture.png"];
-    files.forEach(function(item){
-        queue.loadFile({id:item, src:"assets/" + item});
-    });
+        queue.loadFile({id:"nz_capture", src:"assets/nz _capture.png"});
+        
+ 
+        queue.addEventListener("complete", main);
 }
 
 
 function main(){
     stage.removeAllChildren();
-    scenes.push(scene1Create());
-    scenes.push(scene2Create());
+    scenes.push(page1Create());
+    //scenes.push(page2Create());
     sindex = 1;
     stage.addChild(scenes[sindex]);
 }
@@ -42,5 +42,5 @@ function nextScene(){
 function sceneDestroy(scene){
     scene.removeAllEventListeners();
     scene.removeAllChildren();
-    scene.data=null;
+    scene.data = null;
 }
