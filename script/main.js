@@ -22,14 +22,25 @@ function preload(){
 
 
 function main(){
+    
     stage.removeAllChildren();
-    scenes.push(page1Create());
-    //scenes.push(page2Create());
-    sindex = 0;
-    stage.addChild(scenes[sindex]);
+   // sceneCreator();
+   scenes.push(page1Create());
+   scenes.push(page2Create());
+    
+    
 }
 
-/* function nextScene(){
+// function sceneCreator(){
+//     // scenes.push(page1Create());
+//     // scenes.push(page2Create());
+//     //scenes.push(page3Create());
+//     //scenes.push(page4Create());
+//     sindex = 0;
+//     stage.addChild(scenes[sindex]);
+// }
+
+ /* function nextScene(){
     stage.removeChild(scenes[sindex]);
     sceneDestroy(scenes[sindex]);
     if(sindex < scenes.length){
@@ -37,7 +48,7 @@ function main(){
         sindex++;
         stage.addChild(scenes[sindex]);
     }
-} */
+}  */
 
 function sceneDestroy(scene){
     scene.removeAllEventListeners();

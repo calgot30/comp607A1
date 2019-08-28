@@ -1,3 +1,4 @@
+
 function page1Create(){
     var scene = new createjs.Container();
     scene.name = "page1";
@@ -39,6 +40,8 @@ function page1Create(){
     imgCar.graphics.beginFill("blue").drawRect(550,450,50,50,2,2,2,2);
     imgCow.graphics.beginFill("red").drawCircle(150,220,30);
     
+    
+
     imgNZ.x = -50;
     imgNZ.y = 30;
     //scene.sendBackwards(imgNZ);
@@ -47,12 +50,17 @@ function page1Create(){
 
     
     
+    imgCow.addEventListener("click", function(event) {});
+    imgCar.addEventListener("click", function(event) { alert("clicked"); });
+    imgRubbish.addEventListener("click", function(event) { alert("clicked"); });
     scene.addEventListener("tick", scene.animateText);       
     scene.addChild(scene.data.tText);   
     scene.addChild(imgNZ);
     scene.addChild(imgCow);
     scene.addChild(imgCar);
     scene.addChild(imgRubbish);
+
+    
     return scene;
 }
 
