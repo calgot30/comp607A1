@@ -25,11 +25,11 @@ function main(){
     stage.removeAllChildren();
     scenes.push(page1Create());
     //scenes.push(page2Create());
-    sindex = 1;
+    sindex = 0;
     stage.addChild(scenes[sindex]);
 }
 
-function nextScene(){
+/* function nextScene(){
     stage.removeChild(scenes[sindex]);
     sceneDestroy(scenes[sindex]);
     if(sindex < scenes.length){
@@ -37,7 +37,7 @@ function nextScene(){
         sindex++;
         stage.addChild(scenes[sindex]);
     }
-}
+} */
 
 function sceneDestroy(scene){
     scene.removeAllEventListeners();
