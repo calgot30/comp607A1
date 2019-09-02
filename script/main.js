@@ -20,38 +20,29 @@ function preload(){
         queue.addEventListener("complete", main);
 }
 
-
 function main(){
     
    stage.removeAllChildren();
-   // sceneCreator();
    scenes.push(page1Create());
    scenes.push(page2Create());
+   scenes.push(page3Create());
+   scenes.push(page4Create());
    sindex = 0;
-   stage.addChild(scenes[sindex]);
-   
-   
-    
+   stage.addChild(scenes[sindex]);  
 }
 
-// function sceneCreator(){
-//     // scenes.push(page1Create());
-//     // scenes.push(page2Create());
-//     //scenes.push(page3Create());
-//     //scenes.push(page4Create());
-//     sindex = 0;
-//     stage.addChild(scenes[sindex]);
-// }
-
- function nextScene(){
-    stage.removeChild(scenes[sindex]);
-    sceneDestroy(scenes[sindex]);
-    if(sindex < scenes.length){
-        console.log("next Scene");
-        sindex++;
-        stage.addChild(scenes[sindex]);
-    }
-} 
+/*
+Takes sindex as an arg and recreates all of the scenes in the scene array.
+Then puts the corresponding stage on screen that relates to the sindex value.
+*/
+function sceneCreator(sindex){
+    stage.removeAllChildren();
+    scenes.push(page1Create());
+    scenes.push(page2Create());
+    scenes.push(page3Create());
+    scenes.push(page4Create());
+    stage.addChild(scenes[sindex]);
+}
 
 function sceneDestroy(scene){
     scene.removeAllEventListeners();
