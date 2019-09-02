@@ -23,11 +23,14 @@ function preload(){
 
 function main(){
     
-    stage.removeAllChildren();
+   stage.removeAllChildren();
    // sceneCreator();
    scenes.push(page1Create());
    scenes.push(page2Create());
-    
+   sindex = 0;
+   stage.addChild(scenes[sindex]);
+   
+   
     
 }
 
@@ -40,7 +43,7 @@ function main(){
 //     stage.addChild(scenes[sindex]);
 // }
 
- /* function nextScene(){
+ function nextScene(){
     stage.removeChild(scenes[sindex]);
     sceneDestroy(scenes[sindex]);
     if(sindex < scenes.length){
@@ -48,7 +51,7 @@ function main(){
         sindex++;
         stage.addChild(scenes[sindex]);
     }
-}  */
+} 
 
 function sceneDestroy(scene){
     scene.removeAllEventListeners();

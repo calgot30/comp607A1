@@ -27,8 +27,16 @@ function page1Create(){
         }
     };
 
-    scene.animateTextTwo = function(event){
+    
 
+    scene.animateTextTwo = function(event){
+        if (scene.data.tTimer < createjs.Ticker.getTime() + 1000){
+            scene.data.tTimer = createjs.Ticker.getTime() + 50;
+            if (scene.data.tIndex < scene.data.tData.length){
+                scene.data.tText.text = scene.data.tText.text + scene.data.tData[scene.data.tIndex];
+                scene.data.tIndex = scene.data.tIndex + 1;                
+            }
+        }
     };
     
     var imgNZ = new createjs.Bitmap(queue.getResult("nz_capture"));
@@ -50,15 +58,19 @@ function page1Create(){
 
     
     
-    imgCow.addEventListener("click", function(event) {});
-    imgCar.addEventListener("click", function(event) { alert("clicked"); });
-    imgRubbish.addEventListener("click", function(event) { alert("clicked"); });
+    //imgCow.addEventListener("click", goToURLC());
+    //imgCar.addEventListener("click", function(event) { alert("clicked"); });
+    //imgRubbish.addEventListener("click", function(event) { alert("clicked"); });
     scene.addEventListener("tick", scene.animateText);       
     scene.addChild(scene.data.tText);   
     scene.addChild(imgNZ);
     scene.addChild(imgCow);
     scene.addChild(imgCar);
     scene.addChild(imgRubbish);
+
+    /* function goToURLC(){
+        sceneDestroy(scene);
+     } */
 
     
     return scene;

@@ -50,7 +50,7 @@ function page2Create(){
 
     
     
-    imgCow.addEventListener("click", function(event) {imgCow.link("page2.js")});
+    imgCow.addEventListener("click", function(event) { alert("clicked")});
     //var result = imgCow.link(page2.js);
     imgCar.addEventListener("click", function(event) { alert("clicked"); });
     imgRubbish.addEventListener("click", function(event) { alert("clicked"); });
