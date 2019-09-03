@@ -3,8 +3,8 @@ var queue;
 var scenes = [];
 var sindex;
 
+
 function init(){
-    createjs.RotationsPlugin.install();
     stage = new createjs.Stage("stageCanvas");
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
@@ -17,6 +17,7 @@ function preload(){
 
         queue.loadFile({id:"nz_capture", src:"assets/nz _capture.png"});
         queue.loadFile({id:"River", src:"assets/River Spritesheet.png"});
+        queue.loadFile({id:"algae", src:"assets/AlgaeDots.png"});
  
         queue.addEventListener("complete", main);
 }

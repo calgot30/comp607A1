@@ -1,19 +1,50 @@
+var algaeGroup;
+
 
 function page2Create(){
     var scene2 = new createjs.Container();
     scene2.name = "page2";
     scene2.data = {};
     scene2.data.tTimer = 0;
-    scene2.data.tData = "Although New Zealand portrays itself as a clean and green country, \nit has " + 
-    "its issues just like the rest of the world, this website explains\nto you the problems that " +
-    "New Zealand has with pollution.";
+    scene2.data.tData = "Because of the large amount of agriculture in New Zealand,\n" +   
+    "massive quantities of nitrogen is washed into waterways from animal \nurine" + 
+    ", causing 'overfeeding' of microorganisms that we call algae" ;
     scene2.data.tIndex = 0;
     scene2.data.tText = new createjs.Text("", "22px Verdana", "#000000");
     scene2.data.tText.x = 20;
     scene2.data.tText.y = 20;
     scene2.data.fTimer = 0;
  
-    
+    scene2.textData = {};
+    scene2.textData.tDTwo = "The algae then reproduces to excessive levels, causing what \n" + 
+    "is known as an 'algal bloom'. These blooms starve the waterways of \n" + 
+    "oxygen, killing off any local fish in the water.";
+    scene2.textData.tDText = new createjs.Text("", "22px Verdana", "#000000");
+    scene2.textData.tDText.x = 20;
+    scene2.textData.tDText.y = 20;
+    scene2.textData.tDTimer = 0;
+    scene2.textData.tDIndex = 0; 
+
+    scene2.textThreeData = {};
+    scene2.textThreeData.tDTwo = "Humans are now coming under threat from nitrogen pollution, \n" + 
+    "82 percent of New Zealand waterways are now \n" + 
+    "deemed 'unsafe for swimming'.";
+    scene2.textThreeData.tDText = new createjs.Text("", "22px Verdana", "#000000");
+    scene2.textThreeData.tDText.x = 20;
+    scene2.textThreeData.tDText.y = 20;
+    scene2.textThreeData.tDTimer = 0;
+    scene2.textThreeData.tDIndex = 0; 
+
+
+    scene2.final = {};
+    scene2.final.tTimer = 0;
+    scene2.final.tData = "All information was gathered from the Ministry for the Environment";
+    scene2.final.tIndex = 0;
+    scene2.final.tText = new createjs.Text("", "22px Verdana", "#000000");
+    scene2.final.tText.x = 20;
+    scene2.final.tText.y = 560;
+    scene2.final.fTimer = 0;
+
     
     scene2.animateText = function(event){
         if (scene2.data.tTimer < createjs.Ticker.getTime()){
@@ -24,6 +55,68 @@ function page2Create(){
             }
         }
     }; 
+
+    scene2.animateTextTwo = function(event){     
+        if (scene2.textData.tDTimer < createjs.Ticker.getTime()){
+            scene2.textData.tDTimer = createjs.Ticker.getTime() + 50;
+            if (scene2.textData.tDIndex < scene2.textData.tDTwo.length){
+                scene2.textData.tDText.text = scene2.textData.tDText.text + scene2.textData.tDTwo[scene2.textData.tDIndex];
+                scene2.textData.tDIndex = scene2.textData.tDIndex + 1;                
+            }
+        }    
+    }; 
+
+    scene2.animateTextThree = function(event){     
+        if (scene2.textThreeData.tDTimer < createjs.Ticker.getTime()){
+            scene2.textThreeData.tDTimer = createjs.Ticker.getTime() + 50;
+            if (scene2.textThreeData.tDIndex < scene2.textThreeData.tDTwo.length){
+                scene2.textThreeData.tDText.text = scene2.textThreeData.tDText.text + scene2.textThreeData.tDTwo[scene2.textThreeData.tDIndex];
+                scene2.textThreeData.tDIndex = scene2.textThreeData.tDIndex + 1;                
+            }
+        }    
+    }; 
+
+    scene2.animateTextFour = function(event){
+        if (scene2.final.tTimer < createjs.Ticker.getTime()){
+            scene2.final.tTimer = createjs.Ticker.getTime() + 50;
+            if (scene2.final.tIndex < scene2.final.tData.length){
+                scene2.final.tText.text = scene2.final.tText.text + scene2.final.tData[scene2.final.tIndex];
+                scene2.final.tIndex = scene2.final.tIndex + 1; 
+            }
+        }
+    }; 
+
+
+    setTimeout(holdText, 36000)
+    function holdText(){
+        scene2.addEventListener("tick", scene2.animateTextThree); 
+        scene2.addChild(scene2.textThreeData.tDText);   
+    }
+
+    setTimeout(waitText, 19500)
+    function waitText(){   
+            scene2.addEventListener("tick", scene2.animateTextTwo); 
+            scene2.addChild(scene2.textData.tDText);   
+    }
+
+    setTimeout(removeChild1, 34000)
+    function removeChild1(){
+        createjs.Tween.get(scene2.textData.tDText)
+        .to({alpha:0}, 3000)
+    }
+
+    setTimeout(removeChild, 17000)
+
+    function removeChild(){
+        createjs.Tween.get(scene2.data.tText)
+        .to({alpha:0}, 3000)
+    }
+
+    scene2.addEventListener("tick", scene2.animateTextFour);
+    scene2.addChild(scene2.final.tText)
+    createjs.Tween.get(scene2.final.tText)
+    .to({alpha:0.5})
+
        
     var data = {
         images: [queue.getResult("River")],
@@ -37,8 +130,9 @@ function page2Create(){
         }
    
     }
+
+
     
-    //scene2.beginFill("green");
 
     var spritesheet = new createjs.SpriteSheet(data);
     var runSprite = new createjs.Sprite(spritesheet, "run");
@@ -69,48 +163,74 @@ function page2Create(){
     
    
     var imgChart = new createjs.Shape();
-    var imgCar = new createjs.Shape();
-    var imgRubbish = new createjs.Shape();
+    var imgAlgae = new createjs.Shape();
+    var algaeDots = new createjs.Bitmap(queue.getResult("algae"));
+    var button = new createjs.Bitmap(queue.getResult("Button"));
 
-    // imgRubbish.graphics.beginFill("yellow").drawCircle(650,150,30);
-    // imgCar.graphics.beginFill("blue").drawRect(550,450,50,50,2,2,2,2);
+   
+   
+   
+    algaeDots.scaleX = 0.8;
+    algaeDots.scaleY = 0.8;
+    algaeDots.regX = 150;
+    algaeDots.regY = 150; 
+    algaeDots.x = 400;
+    algaeDots.y = 300;
+    algaeDots.alpha = 0;
 
-    imgChart.graphics.beginFill("#4287f5").drawCircle(560,510,120);
+    setTimeout(drawDots, 27000)
 
+    function drawDots(){
+        createjs.Tween.get(algaeDots)
+            .to({alpha: 1}, 6000)
+            .to({rotation: 720, rotationDir:1}, 8000)
+            .to({alpha:0}, 5000)
+    }
+
+    
+    
+    imgAlgae.graphics.beginFill("red").drawCircle(0,0,2);
+
+    imgAlgae.alpha = 0;
+    imgAlgae.x = 400;
+    imgAlgae.y = 300;
+
+    setTimeout(colorCircle, 35000)
+
+    function colorCircle(){
+        createjs.Tween.get(imgAlgae)
+            .to({alpha: 1, scaleX: 60, scaleY: 60}, 8000, createjs.Ease.backOut)
+            .to({})
+    }
+
+    
+
+
+    imgChart.graphics.beginFill("#4287f5").drawCircle(0,0,120);
     imgChart.alpha = 0;
-    imgChart.regX = 60;
-    imgChart.regY = 60;
+    imgChart.x=   500;
+    imgChart.y =  450; 
 
-    setTimeout(drawChart, 10000);
+    setTimeout(drawChart, 11000);
 
         function drawChart(){
             createjs.Tween.get(imgChart)
-                .to({alpha:1}, 20000)
-                .to({rotation:360, rotationDir:1}, 5000)
+                .to({alpha:1, rotation:720, rotationDir:1}, 15000)
+                .to({x: 400, y: 300}, 2000, createjs.Ease.circOut)
+                .to({rotation:720, rotationDir:1}, 2000)
+                .to({style:"#d90f0f"}, 5000)
+                .to({alpha: 0}, 8000)
                 
         }
 
     scene2.addEventListener("tick", scene2.animateText);
     scene2.addChild(scene2.data.tText); 
-
     
-
-
     scene2.addChild(runSprite);
-    //scene2.addChild(spriteRun);
-    
-
-    //scene2.addEventListener("tick", scene2.animateText);    
-    //scene2.addEventListener("tick", animateTextTwo);
-    
-    //scene2.addChild(scene2.data.tText);   
-    
-    //scene2.addChild(scene2.data.tText);   
     scene2.addChild(imgChart);
-    //scene2.addChild(imgCar);
-    //scene2.addChild(imgRubbish);
-   
-   
+    scene2.addChild(imgAlgae);
+    scene2.addChild(algaeDots);
+    
 
     //a janky workaround to be able to use the setTimeout() function on an event listener,
     //the countdown is set as soon as the page is loaded.
