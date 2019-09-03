@@ -137,14 +137,14 @@ function page2Create(){
     var spritesheet = new createjs.SpriteSheet(data);
     var runSprite = new createjs.Sprite(spritesheet, "run");
 
-    var sheetSprite = new createjs.SpriteSheet(data);
-    var spriteRun = new createjs.Sprite(sheetSprite, "run");
+    // var sheetSprite = new createjs.SpriteSheet(data);
+    // var spriteRun = new createjs.Sprite(sheetSprite, "run");
 
     runSprite.scaleX = 2.5; runSprite.scaleY = 1.1;
     runSprite.x = -0; runSprite.y = 140;
 
-    spriteRun.scaleX = 1.4; spriteRun.scaleY = 1.2;
-    spriteRun.x = 400; spriteRun.y = 150;
+    //spriteRun.scaleX = 1.4; spriteRun.scaleY = 1.2;
+    //spriteRun.x = 400; spriteRun.y = 150;
 
 
     createjs.Tween.get(runSprite)

@@ -21,6 +21,8 @@ function preload(){
         queue.loadFile({id:"Button", src:"assets/BackButton.png"});
         queue.loadFile({id:"Smoke", src:"assets/SmokeSpritesheet.png"});
         queue.loadFile({id:"water", src:"assets/WaterPollutionSpritesheet.png"});
+        queue.loadFile({id:"singleSmoke", src:"assets/SingleSmoke.png"});
+        queue.loadFile({id:"weight", src:"assets/Weight.png"});
 
         queue.addEventListener("complete", main);
 }
