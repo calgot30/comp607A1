@@ -3,6 +3,16 @@ var queue;
 var scenes = [];
 var sindex;
 
+/*
+This is the main page that runs the separate scenes for my project, because
+I had some issues with getting my array to work correctly with my functions
+I had to omit the idea of having all of my pages go back to the home
+page, so this means to view all of the separate pages you have to
+regresh the web page and click on each one separately, apologies for
+any inconvenience.
+
+Note: All images you are seeing I drew in GIMP
+*/
 
 function init(){
     stage = new createjs.Stage("stageCanvas");
@@ -11,10 +21,9 @@ function init(){
     preload();
 }
 
+//Pre-load all of the image assets into the queue
 function preload(){
     queue = new createjs.LoadQueue();
-    
-
         queue.loadFile({id:"nz_capture", src:"assets/nz _capture.png"});
         queue.loadFile({id:"River", src:"assets/River Spritesheet.png"});
         queue.loadFile({id:"algae", src:"assets/AlgaeDots.png"});
@@ -27,6 +36,8 @@ function preload(){
         queue.addEventListener("complete", main);
 }
 
+//first clears the screen of any possible scenes, then loads accordingly
+//and then begins the display at the first entry in the array
 function main(){
     
    stage.removeAllChildren();
@@ -53,6 +64,7 @@ function sceneCreator(sindex){
     //preload();
 }
 
+//clears the scene from the stage and takes away all event listeners
 function sceneDestroy(scene){
     scene.removeAllEventListeners();
     scene.removeAllChildren();

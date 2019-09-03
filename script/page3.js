@@ -16,9 +16,9 @@ function page3Create(){
     scene3.data.alpha = 1;
  
     scene3.textData = {};
-    scene3.textData.tDTwo = "The algae then reproduces to excessive levels, causing what \n" + 
-    "is known as an 'algal bloom'. These blooms starve the waterways of \n" + 
-    "oxygen, killing off any local fish in the water.";
+    scene3.textData.tDTwo = "New Zealands net emissions increased by 64.9% compared with \n" + 
+    "1990, these emissions included agriculture, automotive, \n" +
+    "energy, and foresty emissions.";
     scene3.textData.tDText = new createjs.Text("", "22px Verdana", "#000000");
     scene3.textData.tDText.x = 20;
     scene3.textData.tDText.y = 20;
@@ -26,9 +26,8 @@ function page3Create(){
     scene3.textData.tDIndex = 0; 
 
     scene3.textThreeData = {};
-    scene3.textThreeData.tDTwo = "Humans are now coming under threat from nitrogen pollution, \n" + 
-    "82 percent of New Zealand waterways are now \n" + 
-    "deemed 'unsafe for swimming'.";
+    scene3.textThreeData.tDTwo = "The increased temperatures are causing higher land and \n" + 
+    "sea temperatures, meaning less rainfall and more drought";
     scene3.textThreeData.tDText = new createjs.Text("", "22px Verdana", "#000000");
     scene3.textThreeData.tDText.x = 20;
     scene3.textThreeData.tDText.y = 20;
@@ -87,28 +86,30 @@ function page3Create(){
     }; 
 
    
-    setTimeout(holdText, 36000)
-    function holdText(){
-        scene3.addEventListener("tick", scene3.animateTextThree); 
-        scene3.addChild(scene3.textThreeData.tDText);   
-    }
+   
 
-    setTimeout(waitText, 19500)
+    setTimeout(waitText, 14000)
     function waitText(){   
             scene3.addEventListener("tick", scene3.animateTextTwo); 
             scene3.addChild(scene3.textData.tDText);   
     }
 
-    setTimeout(removeChild1, 34000)
+    setTimeout(holdText, 26000)
+    function holdText(){
+        scene3.addEventListener("tick", scene3.animateTextThree); 
+        scene3.addChild(scene3.textThreeData.tDText);   
+    }
+
+    setTimeout(removeChild1, 24000)
     function removeChild1(){
         createjs.Tween.get(scene3.textData.tDText)
         .to({alpha:0}, 3000)
     }
 
-    setTimeout(removeChild, 17000)
+    setTimeout(removeChild, 12000)
     function removeChild(){
         createjs.Tween.get(scene3.data.tText)
-        .to({alpha:0}, 3000)
+        .to({alpha:0}, 2000)
     }
 
     scene3.addEventListener("tick", scene3.animateTextFour);
@@ -119,8 +120,128 @@ function page3Create(){
     var smokeGroup = new createjs.Container();
     var smokeGroup2 = new createjs.Container();
     var smokeGroup3 = new createjs.Container();
+   
+    var spread = {
+        images: [queue.getResult("Smoke")],
+
+        frames: {width:200, height:150, count:8, spacing:0, margin:0},
+        animations: {
+            moving:{
+                frames:[0,1,2,3,4,5,6,7,6,5,4,3,2,1],
+                speed:0.1
+            }
+        }
+   
+    }
+
+    /*
+    Tween used to lift the anvil up into the air, lots of timing involved
+    */
+    var smokeSpriteSheet = new createjs.SpriteSheet(spread);
+    var spriteSmoke = new createjs.Sprite(smokeSpriteSheet, "run");
+
+    spriteSmoke.x = 300;
+    spriteSmoke.y = 800;
+
+    //using this to transition out the anvil
+    createjs.Tween.get(spriteSmoke)
+        .call(function(){
+            spriteSmoke.gotoAndPlay("moving");
+        })
+        .wait(8000)
+        .to({y: 450}, 3000)
+        .wait(1000)
+        .to({y:-1000}, 3000, createjs.Ease.circin)
+        
+     scene3.addChild(spriteSmoke);
+
+
+
+     /*
+     This section is dedicated to the creation and animation of the trees on screen,
+     I was trying to show the large increase of emissions, with a play on a bar chart, with
+     the idea that it was also showing one of the environmental factors from forestry
+     */
+     var tree1 = new createjs.Shape;
+     var tree2 = new createjs.Shape;
+     var tree3 = new createjs.Shape;
+     var tree4 = new createjs.Shape;
+     var tree5 = new createjs.Shape; 
+
+     tree1.graphics.beginFill("brown").drawRect(0,0,20,200,2,2,2,2);
+     tree2.graphics.beginFill("brown").drawRect(0,0,20,300,2,2,2,2);
+     tree3.graphics.beginFill("brown").drawRect(0,0,20,400,2,2,2,2);
+     tree4.graphics.beginFill("brown").drawRect(0,0,20,500,2,2,2,2);
+     tree5.graphics.beginFill("brown").drawRect(0,0,20,600,2,2,2,2);
+
+
+        tree1.x = 50;
+        tree1.y = 600;
+        tree1.regX = 20;
+        tree1.regY = 200;
+        tree1.alpha = 0;
+
+        tree2.x = 150;
+        tree2.y = 600;
+        tree2.regX = 20;
+        tree2.regY = 300;
+        tree2.alpha = 0;
+
+        tree3.x = 250;
+        tree3.y = 600;
+        tree3.regX = 20;
+        tree3.regY = 400;
+        tree3.alpha = 0;
+
+        tree4.x = 350;
+        tree4.y = 600;
+        tree4.regX = 20;
+        tree4.regY = 500;
+        tree4.alpha = 0;
+
+        tree5.x = 450;
+        tree5.y = 600;
+        tree5.regX = 20;
+        tree5.regY = 600;
+        tree5.alpha = 0;
+
+     createjs.Tween.get(tree1)
+        .wait(19000)
+        .to({alpha: 1}, 1000)
+        .to({rotation:80, rotationDir: 1}, 2000, createjs.Ease.circin)
+
+    createjs.Tween.get(tree2)
+        .wait(19000)
+        .to({alpha: 1}, 1000)
+        .to({rotation:85, rotationDir: 1}, 2000, createjs.Ease.circin)
+
+        createjs.Tween.get(tree3)
+        .wait(19000)
+        .to({alpha: 1}, 1000)
+        .to({rotation:80, rotationDir: 1}, 2000, createjs.Ease.circin)
+
+        createjs.Tween.get(tree4)
+        .wait(19000)
+        .to({alpha: 1}, 1000)
+        .to({rotation:80, rotationDir: 1}, 2000, createjs.Ease.circin)
+
+        createjs.Tween.get(tree5)
+        .wait(19000)
+        .to({alpha: 1}, 1000)
+        .to({rotation:80, rotationDir: 1}, 2000, createjs.Ease.circin)
+
+
+    
+
+     scene3.addChild(tree1);
+     scene3.addChild(tree2);
+     scene3.addChild(tree3);
+     scene3.addChild(tree4);
+     scene3.addChild(tree5);
+   
     /*
     I utilised this code from MarkNikoras' code example in class (fishGroup).
+    Creates the smoke clouds at the beginning of the page creation
     */
     for(var i = 0; i < 5; i++){
         // create a smoke bitmap object with a random location
@@ -217,14 +338,15 @@ function page3Create(){
       weight.y = -800;
 
 
-      
+      //drops in to show the weight of C02 emissions
+      //smoke pushes it out with timed animation
       setTimeout(dropWeight, 6500)
       function dropWeight(){
         createjs.Tween.get(weight)
         .to({scaleX: 1.5, scaleY: 1.5})
         .to({y:200}, 2000, createjs.Ease.circin)
-        .wait(2000)
-        .to({alpha: 0}, 3000)
+        .wait(3500)
+        .to({y: -1000}, 3000, createjs.Ease.circin)
       scene3.addChild(weight);
     }
 

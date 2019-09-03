@@ -1,7 +1,18 @@
 
 
-
+/*
+This page heavily relies on sprite animation, and bitmapping
+The river is a spritesheet made by me, and I am manipulating its properties
+to make it move across the page
+*/
 function page2Create(){
+
+     /*
+    all of the text content is created here, I used Mark Nikoras' example code
+    from his 'smart cities' example to dynamically generate all the text on screen.
+
+    There are functions which delay the text from being displayed all at once
+    */
     var scene2 = new createjs.Container();
     scene2.name = "page2";
     scene2.data = {};
@@ -87,6 +98,12 @@ function page2Create(){
     }; 
 
 
+    /*
+    methods I created to generate the text at separate times and also
+    have it fade out as well, there was no wait function for text
+    so I placed the addition of them to the scene inside of these 
+    timeout functions.
+    */
     setTimeout(holdText, 36000)
     function holdText(){
         scene2.addEventListener("tick", scene2.animateTextThree); 
@@ -118,6 +135,7 @@ function page2Create(){
     .to({alpha:0.5})
 
        
+    //spritesheet data for the river
     var data = {
         images: [queue.getResult("River")],
 
@@ -133,20 +151,17 @@ function page2Create(){
 
 
     
-
+    //declaring sprite variable and action
     var spritesheet = new createjs.SpriteSheet(data);
     var runSprite = new createjs.Sprite(spritesheet, "run");
 
-    // var sheetSprite = new createjs.SpriteSheet(data);
-    // var spriteRun = new createjs.Sprite(sheetSprite, "run");
-
+    //riversprite scaling
     runSprite.scaleX = 2.5; runSprite.scaleY = 1.1;
     runSprite.x = -0; runSprite.y = 140;
 
-    //spriteRun.scaleX = 1.4; spriteRun.scaleY = 1.2;
-    //spriteRun.x = 400; spriteRun.y = 150;
 
-
+    //action to make the river across the screen, and then scale down
+    //in size and then disappear off screen with alpha property
     createjs.Tween.get(runSprite)
         .call(function(){
             runSprite.gotoAndPlay("moving");
@@ -161,19 +176,20 @@ function page2Create(){
     
 
     
-   
+    //declaring all of the extra shapes and bitmaps on screen
     var imgChart = new createjs.Shape();
     var imgAlgae = new createjs.Shape();
     var algaeDots = new createjs.Bitmap(queue.getResult("algae"));
-    var button = new createjs.Bitmap(queue.getResult("Button"));
+    
+    //This button was omitted out because of the difficulties I had implementing it
+    //var button = new createjs.Bitmap(queue.getResult("Button"));
+    // button.scaleX = 0.5;
+    // button.scaleY = 0.5
+    // button.x = 0;
+    // button.y = 550;
+    // button.alpha = 1;
 
-    button.scaleX = 0.5;
-    button.scaleY = 0.5
-    button.x = 0;
-    button.y = 550;
-    button.alpha = 1;
-
-   
+    //setting the values for the algae dots
     algaeDots.scaleX = 0.8;
     algaeDots.scaleY = 0.8;
     algaeDots.regX = 150;
@@ -182,8 +198,10 @@ function page2Create(){
     algaeDots.y = 300;
     algaeDots.alpha = 0;
 
+    //timeout function to stop the dots from being drawn early
+    //They then are slowly brough into view, and then rotate to simulate the water
+    //spinning
     setTimeout(drawDots, 27000)
-
     function drawDots(){
         createjs.Tween.get(algaeDots)
             .to({alpha: 1}, 6000)
@@ -192,15 +210,17 @@ function page2Create(){
     }
 
     
-    
+    //changing the values for the algae "filling the water"
     imgAlgae.graphics.beginFill("red").drawCircle(0,0,2);
-
     imgAlgae.alpha = 0;
     imgAlgae.x = 400;
     imgAlgae.y = 300;
 
+    /*
+    This Tween scales the circle up and brings it to view, its supposed to look like it
+    has consumed the pool of water
+    */
     setTimeout(colorCircle, 35000)
-
     function colorCircle(){
         createjs.Tween.get(imgAlgae)
             .to({alpha: 1, scaleX: 60, scaleY: 60}, 6000, createjs.Ease.backOut)
@@ -209,17 +229,23 @@ function page2Create(){
 
     
 
-
+    //blue circle
     imgChart.graphics.beginFill("#4287f5").drawCircle(0,0,120);
     imgChart.alpha = 0;
     imgChart.x=   500;
     imgChart.y =  450; 
+    imgChart.scaleX = 0.1;
+    imgChart.scaleY = 0.1;
 
+    /*
+    This circle comes into view like it is being filled up by the running
+    river
+    */
     setTimeout(drawChart, 11000);
-
         function drawChart(){
             createjs.Tween.get(imgChart)
-                .to({alpha:1, rotation:720, rotationDir:1}, 15000)
+                .to({alpha:1, rotation:720, rotationDir:1,
+                scaleX: 1, scaleY: 1 }, 15000)
                 .to({x: 400, y: 300}, 2000, createjs.Ease.circOut)
                 .to({rotation:720, rotationDir:1}, 2000)
                 .to({style:"#d90f0f"}, 5000)
@@ -242,6 +268,7 @@ function page2Create(){
     //     sceneCreator(sindex);
     //   });
 
+    //adding images to the scene
     scene2.addChild(runSprite);
     scene2.addChild(imgChart);
     scene2.addChild(imgAlgae);

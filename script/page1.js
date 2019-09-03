@@ -1,5 +1,19 @@
 
+/*
+This page is the 'home screen' of the activities, from here you can click on
+the different sprites to take you to their related pages
+
+Note: I had some issues regarding the click events on the other pages so
+you cannot go back to this page from those pages, to get back to here you
+need to refresh the content and then begin again.
+*/
 function page1Create(){
+    /*
+    all of the text content is created here, I used Mark Nikoras' example code
+    from his 'smart cities' example to dynamically generate all the text on screen.
+
+    There are functions which delay the text from being displayed all at once
+    */
     var scene = new createjs.Container();
     scene.name = "page1";
     scene.data = {};
@@ -26,7 +40,7 @@ function page1Create(){
     scene.textData.finished = false;
     scene.textData.tDIndex = 0; 
 
-    //scene.data.
+    
 
 
      scene.animateText = function(event){
@@ -57,7 +71,7 @@ function page1Create(){
     
 
   
-
+        //spritesheet info for the water-pollution sprite
         var info = {
             images: [queue.getResult("water")],
     
@@ -73,21 +87,23 @@ function page1Create(){
      
 
 
-
+    //declaring the NZ image I drew in gimp
     var imgNZ = new createjs.Bitmap(queue.getResult("nz_capture"));
 
+    //sprite declaration for the water sprite
     var imgWater = new createjs.SpriteSheet(info);
     var waterSprite = new createjs.Sprite(imgWater, "run");
 
         waterSprite.x = 80;
         waterSprite.y = 120;
 
+    //running its action
     createjs.Tween.get(waterSprite)
     .call(function(){
         waterSprite.gotoAndPlay("dripping");
     })
 
-
+    //spritesheet info for the smoke cloud
     var spread = {
         images: [queue.getResult("Smoke")],
 
@@ -101,8 +117,8 @@ function page1Create(){
    
     }
 
+    //declaring the smoke cloud sprite and calling its action
     var imgSmoke = new createjs.SpriteSheet(spread);
-
     var smokeSprite = new createjs.Sprite(imgSmoke, "run");
 
         smokeSprite.x = 475;
@@ -118,23 +134,26 @@ function page1Create(){
    
    
    
-   
-    var imgRubbish = new createjs.Shape();
+   //I was going to have a 3rd page but due to time constraints and the
+   //overall large scope of my topic I decided to omit this
+    //var imgRubbish = new createjs.Shape();
 
     
 
 
-
-    imgRubbish.graphics.beginFill("yellow").drawCircle(650,150,30);
+    //test images for position, I replaced these with the sprites on screen
+    //imgRubbish.graphics.beginFill("yellow").drawCircle(650,150,30);
     //imgCar.graphics.beginFill("blue").drawRect(550,450,50,50,2,2,2,2);
     //imgCow.graphics.beginFill("red").drawCircle(150,220,30);
     
-    
+    //changing nz image transparency and position and scale
     imgNZ.alpha = 0.5;
     imgNZ.x = -50;
     imgNZ.y = 30;
     imgNZ.scaleX = 0.88;
     imgNZ.scaleY = 0.88;
+
+    
 
     
     
@@ -160,22 +179,16 @@ function page1Create(){
         sceneCreator(sindex);
     });
 
-    imgRubbish.addEventListener("click", function goToURLE(){
-        sceneDestroy(scene);
-        sindex = 3;
-        sceneCreator(sindex);
-    });
+    setTimeout(createChild, 6000);
 
-    setTimeout(createChild, 8000);
-
-    scene.addEventListener("tick", scene.animateText);  
-    //scene.addEventListener("tick", scene.animateTextTwo);   
-    scene.addChild(scene.data.tText);   
-    //scene.addChild(scene.textData.tDText);
+    scene.addEventListener("tick", scene.animateText);     
+    scene.addChild(scene.data.tText);  
     scene.addChild(imgNZ);
     scene.addChild(waterSprite);
     scene.addChild(smokeSprite);
-    scene.addChild(imgRubbish);
+     //scene.addEventListener("tick", scene.animateTextTwo); 
+    //scene.addChild(scene.textData.tDText);
+    //scene.addChild(imgRubbish);
   
     
     //a janky workaround to be able to use the setTimeout() function on an event listener,
