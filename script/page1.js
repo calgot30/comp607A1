@@ -107,18 +107,24 @@ function page1Create(){
         sceneCreator(sindex);
     });
 
+    setTimeout(createChild, 8000);
 
     scene.addEventListener("tick", scene.animateText);  
-    scene.addEventListener("tick", scene.animateTextTwo);   
+    //scene.addEventListener("tick", scene.animateTextTwo);   
     scene.addChild(scene.data.tText);   
-    scene.addChild(scene.textData.tDText);
+    //scene.addChild(scene.textData.tDText);
     scene.addChild(imgNZ);
     scene.addChild(imgCow);
     scene.addChild(imgCar);
     scene.addChild(imgRubbish);
   
     
-   
+    //a janky workaround to be able to use the setTimeout() function on an event listener,
+    //the countdown is set as soon as the page is loaded.
+    function createChild(){
+        scene.addEventListener("tick", scene.animateTextTwo); 
+        scene.addChild(scene.textData.tDText);   
+    }
 
     // 
     return scene;
