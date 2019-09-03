@@ -58,17 +58,76 @@ function page1Create(){
 
   
 
+        var info = {
+            images: [queue.getResult("water")],
     
+            frames: {width:200, height:150, count:4, spacing:0, margin:0},
+            animations: {
+                dripping:{
+                    frames:[0,1,2,3,2,1],
+                    speed:0.08
+                }
+            }
+       
+        }
      
 
+
+
     var imgNZ = new createjs.Bitmap(queue.getResult("nz_capture"));
-    var imgCow = new createjs.Shape();
-    var imgCar = new createjs.Shape();
+
+    var imgWater = new createjs.SpriteSheet(info);
+    var waterSprite = new createjs.Sprite(imgWater, "run");
+
+        waterSprite.x = 80;
+        waterSprite.y = 120;
+
+    createjs.Tween.get(waterSprite)
+    .call(function(){
+        waterSprite.gotoAndPlay("dripping");
+    })
+
+
+    var spread = {
+        images: [queue.getResult("Smoke")],
+
+        frames: {width:200, height:150, count:8, spacing:0, margin:0},
+        animations: {
+            moving:{
+                frames:[0,1,2,3,4,5,6,7,6,5,4,3,2,1],
+                speed:0.1
+            }
+        }
+   
+    }
+
+    var imgSmoke = new createjs.SpriteSheet(spread);
+
+    var smokeSprite = new createjs.Sprite(imgSmoke, "run");
+
+        smokeSprite.x = 475;
+        smokeSprite.y = 375;
+
+    createjs.Tween.get(smokeSprite)
+    .call(function(){
+        smokeSprite.gotoAndPlay("moving");
+    })
+
+   
+   
+   
+   
+   
+   
     var imgRubbish = new createjs.Shape();
 
+    
+
+
+
     imgRubbish.graphics.beginFill("yellow").drawCircle(650,150,30);
-    imgCar.graphics.beginFill("blue").drawRect(550,450,50,50,2,2,2,2);
-    imgCow.graphics.beginFill("red").drawCircle(150,220,30);
+    //imgCar.graphics.beginFill("blue").drawRect(550,450,50,50,2,2,2,2);
+    //imgCow.graphics.beginFill("red").drawCircle(150,220,30);
     
     
     imgNZ.alpha = 0.5;
@@ -77,7 +136,7 @@ function page1Create(){
     imgNZ.scaleX = 0.88;
     imgNZ.scaleY = 0.88;
 
-
+    
     
    
     /*
@@ -88,14 +147,14 @@ function page1Create(){
     These methods all call sceneDestroy to wipe the canvas clean and keep it 
     running smoothly
     */
-    imgCow.addEventListener("click",  
+    waterSprite.addEventListener("click",  
     function goToURLC(){
         sceneDestroy(scene);
         sindex = 1;
         sceneCreator(sindex);
       });
 
-    imgCar.addEventListener("click",  function goToURLD(){
+    smokeSprite.addEventListener("click",  function goToURLD(){
         sceneDestroy(scene);
         sindex = 2;
         sceneCreator(sindex);
@@ -114,8 +173,8 @@ function page1Create(){
     scene.addChild(scene.data.tText);   
     //scene.addChild(scene.textData.tDText);
     scene.addChild(imgNZ);
-    scene.addChild(imgCow);
-    scene.addChild(imgCar);
+    scene.addChild(waterSprite);
+    scene.addChild(smokeSprite);
     scene.addChild(imgRubbish);
   
     

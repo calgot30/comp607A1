@@ -1,4 +1,4 @@
-var algaeGroup;
+
 
 
 function page2Create(){
@@ -40,9 +40,9 @@ function page2Create(){
     scene2.final.tTimer = 0;
     scene2.final.tData = "All information was gathered from the Ministry for the Environment";
     scene2.final.tIndex = 0;
-    scene2.final.tText = new createjs.Text("", "22px Verdana", "#000000");
-    scene2.final.tText.x = 20;
-    scene2.final.tText.y = 560;
+    scene2.final.tText = new createjs.Text("", "16px Verdana", "#000000");
+    scene2.final.tText.x = 130;
+    scene2.final.tText.y = 580;
     scene2.final.fTimer = 0;
 
     
@@ -78,7 +78,7 @@ function page2Create(){
 
     scene2.animateTextFour = function(event){
         if (scene2.final.tTimer < createjs.Ticker.getTime()){
-            scene2.final.tTimer = createjs.Ticker.getTime() + 50;
+            scene2.final.tTimer = createjs.Ticker.getTime() + 0;
             if (scene2.final.tIndex < scene2.final.tData.length){
                 scene2.final.tText.text = scene2.final.tText.text + scene2.final.tData[scene2.final.tIndex];
                 scene2.final.tIndex = scene2.final.tIndex + 1; 
@@ -141,7 +141,7 @@ function page2Create(){
     var spriteRun = new createjs.Sprite(sheetSprite, "run");
 
     runSprite.scaleX = 2.5; runSprite.scaleY = 1.1;
-    runSprite.x = -0; runSprite.y = 150;
+    runSprite.x = -0; runSprite.y = 140;
 
     spriteRun.scaleX = 1.4; spriteRun.scaleY = 1.2;
     spriteRun.x = 400; spriteRun.y = 150;
@@ -167,8 +167,12 @@ function page2Create(){
     var algaeDots = new createjs.Bitmap(queue.getResult("algae"));
     var button = new createjs.Bitmap(queue.getResult("Button"));
 
-   
-   
+    button.scaleX = 0.5;
+    button.scaleY = 0.5
+    button.x = 0;
+    button.y = 550;
+    button.alpha = 1;
+
    
     algaeDots.scaleX = 0.8;
     algaeDots.scaleY = 0.8;
@@ -199,7 +203,7 @@ function page2Create(){
 
     function colorCircle(){
         createjs.Tween.get(imgAlgae)
-            .to({alpha: 1, scaleX: 60, scaleY: 60}, 8000, createjs.Ease.backOut)
+            .to({alpha: 1, scaleX: 60, scaleY: 60}, 6000, createjs.Ease.backOut)
             .to({})
     }
 
@@ -226,10 +230,25 @@ function page2Create(){
     scene2.addEventListener("tick", scene2.animateText);
     scene2.addChild(scene2.data.tText); 
     
+
+    //So for this event I had some strange issues, for the most part that
+    //My scenes were all being displayed at the same time and not running 
+    //correctly, due to the lack of time I gave myself I 
+    //chose to omit this event 
+    // button.addEventListener("click",  
+    // function goToURLC(){
+    //     sceneDestroy(scene2);
+    //     sindex = 0;
+    //     sceneCreator(sindex);
+    //   });
+
     scene2.addChild(runSprite);
     scene2.addChild(imgChart);
     scene2.addChild(imgAlgae);
     scene2.addChild(algaeDots);
+
+    //ommitted this due to the reasoning above
+    //scene2.addChild(button);
     
 
     //a janky workaround to be able to use the setTimeout() function on an event listener,

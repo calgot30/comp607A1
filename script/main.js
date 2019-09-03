@@ -18,7 +18,10 @@ function preload(){
         queue.loadFile({id:"nz_capture", src:"assets/nz _capture.png"});
         queue.loadFile({id:"River", src:"assets/River Spritesheet.png"});
         queue.loadFile({id:"algae", src:"assets/AlgaeDots.png"});
- 
+        queue.loadFile({id:"Button", src:"assets/BackButton.png"});
+        queue.loadFile({id:"Smoke", src:"assets/SmokeSpritesheet.png"});
+        queue.loadFile({id:"water", src:"assets/WaterPollutionSpritesheet.png"});
+
         queue.addEventListener("complete", main);
 }
 
@@ -44,6 +47,8 @@ function sceneCreator(sindex){
     scenes.push(page3Create());
     scenes.push(page4Create());
     stage.addChild(scenes[sindex]);
+    //init();
+    //preload();
 }
 
 function sceneDestroy(scene){
